@@ -1,0 +1,193 @@
+"spawners"
+{
+	"maxcreepsonstack"	"21"	//Максимально крипов на стаке
+	"respawntime"		"40"	//Раз в это время будут спавниться крипы
+	"leveltimer"		"420"	//Раз в это время будут улучшаться крипы
+	"spawnspertick"		"5"		//Сколько спавнится крипов
+	"spawnerssettings"
+	{
+		"spawn_1"
+		{
+			"creepstable"
+			{
+				"1"		
+				{
+					"1"	"ogre_level1"
+				}
+				"2"	
+				{
+					"1"	"ogre_level2"
+				}
+				"3"
+				{
+					"1"	"ogre_level3"
+				}
+				"4"	
+				{
+					"1"	"ogre_level4"
+				}
+				"5"	
+				{
+					"1"	"ogre_level5"
+				}
+				"6"	
+				{
+					"1"	"ogre_level6"
+				}				
+			}
+		}
+		"spawn_2"
+		{
+			"maxcreepsonstack"	"16"		
+			"creepstable"
+			{	"1"		
+				{
+					"1"	"doom_level1"
+				}
+				"2"	
+				{
+					"1"	"doom_level2"
+				}
+				"3"
+				{
+					"1"	"doom_level3"
+				}
+				"4"	
+				{
+					"1"	"doom_level4"
+				}
+				"5"	
+				{
+					"1"	"doom_level5"
+				}
+				"6"	
+				{
+					"1"	"doom_level6"
+				}	
+            }				
+		}
+		"spawn_3"
+		{
+			"maxcreepsonstack"	"13"
+			"creepstable"
+			{
+				"1"		
+				{
+					"1"	"bear_level1"
+				}
+				"2"	
+				{
+					"1"	"bear_level2"
+				}
+				"3"
+				{
+					"1"	"bear_level3"
+				}
+				"4"
+				{
+					"1"	"bear_level4"
+				}
+				"5"
+				{
+					"1"	"bear_level5"
+				}
+				"6"
+				{
+					"1"	"bear_level6"
+				}				
+			}	
+	    }
+		"spawn_4"
+		{
+			"maxcreepsonstack"	"13"	//Максимально крипов на стаке(для этого типа спавнов отдельно)
+			"creepstable"
+			{	"1"		
+				{
+					"1"	"roshan_level1"
+				}
+				"2"	
+				{
+					"1"	"roshan_level2"
+				}
+				"3"
+				{
+					"1"	"roshan_level3"
+				}	
+				"4"
+				{
+					"1"	"roshan_level4"
+				}	
+				"5"
+				{
+					"1"	"roshan_level5"
+				}	
+				"6"
+				{
+					"1"	"roshan_level6"
+				}					
+             }				
+	     }
+         "spawn_5"
+	     {
+		    "spawnspertick" "2"
+			"respawntime" "60"
+			"maxcreepsonstack"	"11"
+			"creepstable"
+			{	"1"		
+				{
+					"1"	"centaur_level1"
+				}
+				"2"	
+				{
+					"1"	"centaur_level2"
+				}
+				"3"
+				{
+					"1"	"centaur_level3"
+				}	
+				"4"
+				{
+					"1"	"centaur_level4"
+				}	
+				"5"
+				{
+					"1"	"centaur_level5"
+				}	
+				"6"
+				{
+					"1"	"centaur_level6"
+				}					
+             }				
+	     }
+         "spawn_6"
+	     {
+			"maxcreepsonstack"	"16"
+			"creepstable"
+			{	"1"		
+				{
+					"1"	"skeleton_level1"
+				}
+				"2"	
+				{
+					"1"	"skeleton_level2"
+				}
+				"3"
+				{
+					"1"	"skeleton_level3"
+				}	
+				"4"
+				{
+					"1"	"skeleton_level4"
+				}	
+				"5"
+				{
+					"1"	"skeleton_level5"
+				}	
+				"6"
+				{
+					"1"	"skeleton_level6"
+				}					
+             }				
+	     }		 
+    }
+}

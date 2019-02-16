@@ -1,0 +1,20 @@
+"AddonInfo"
+{
+    maps			"map5v5 map6v6 map2v2"
+	"IsPlayable"		"1"
+	"PenaltiesEnabled" 	"1"
+	"EnablePickRules"	"1"
+	"CheckAFKPlayers" 	"1"
+	"map2v2"
+	{
+					"MaxPlayers"                    "4"
+	}
+	"map5v5"
+	{
+					"MaxPlayers"                    "10"
+	}
+	"map6v6"
+	{
+					"MaxPlayers"                    "12"
+	}
+}

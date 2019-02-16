@@ -1,0 +1,8 @@
+map6v6noduel
+{
+	material materials/overviews/map6v6noduel.vmat
+	pos_x -10752
+	pos_y 10752
+	scale 21.000
+}
+

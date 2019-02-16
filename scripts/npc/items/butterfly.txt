@@ -1,0 +1,852 @@
+""
+{
+	"item_rebels1"
+	{
+	    "BaseClass"						"item_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	        ""
+		"ScriptFile"					"items/rebels_sword/rebels1.lua"
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemStackable"					"0"
+		"ItemCost" "0"
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "0"
+		"ItemDroppable"                 "1"
+		"ItemPurchasable"				"0"
+		"ItemInitialCharges"			"1"
+        "ItemDisplayOwnership" "1"
+        "ItemPermanent" "0"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE_STACKING"		
+
+		"AbilityCooldown"				"0.4"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_armor"			"0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_all_stats"		"0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"0"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"0"
+			}
+
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"disarmor"				"5"
+			}
+
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"disarmor_const"		"4"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_disarmor_pct"		"25"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"1"
+			}
+		}
+	}	
+	"item_recipe_venom_liquid2"
+	{
+		"AbilityTextureName" 				"custom/recipe"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"Model"							"models/props_gameplay/recipe.mdl"
+		"BaseClass"                     "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"50"
+		"ItemShopTags"					""
+
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_venom_liquid2"
+		"ItemRequirements"
+		{
+			"01"						"item_venom_liquid;item_venom_liquid"
+		}
+	}
+	"item_recipe_venom_liquid3"
+	{
+		"AbilityTextureName" 				"custom/recipe"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"Model"							"models/props_gameplay/recipe.mdl"
+		"BaseClass"                     "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"150"
+		"ItemShopTags"					""
+
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_venom_liquid3"
+		"ItemRequirements"
+		{
+			"01"						"item_venom_liquid2;item_venom_liquid2"
+		}
+	}
+"item_venom_liquid2"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"item_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"Model"							"models/props_gameplay/red_box.vmdl"
+	"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+	"AbilityTextureName"			"gu"
+
+	// Item Info
+	//-------------------------------------------------------------------------------------------------------------
+	"ItemShopTags"					"hard_to_tag"
+	"ItemQuality"					"secret_shop"
+	"SecretShop"					"1"
+	"SideShop"						"1"
+
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"							"FIELD_INTEGER"
+			"poison_movement_speed_melee"		"-6"
+		}
+		"02"
+		{
+			"var_type"							"FIELD_INTEGER"
+			"poison_movement_speed_ranged"		"-4"
+		}
+		"03"
+		{
+			"var_type"							"FIELD_FLOAT"
+			"poison_duration"					"4.0"
+		}
+		"04"
+		{
+			"var_type"							"FIELD_FLOAT"
+			"poison_damage_per_second"			"8.0"
+		}
+		"05"
+		{
+			"var_type"							"FIELD_FLOAT"
+			"poison_damage_interval"			"2.0"
+		}
+		"06"
+		{
+			"var_type"							"FIELD_INTEGER"
+			"max_stacks"		"3"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_item_orb_of_venom_datadriven"
+		{
+			"Passive"				"1"
+			"IsHidden"				"1"
+			"Attributes" 			"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+			"Orb"
+			{
+				"Priority"				"DOTA_ORB_PRIORITY_ITEM"
+				"Label"					"DOTA_ORB_LABEL_SKADI"  //This does not currently seem to have an effect.  "Label" may not be the right key.
+				"CastAttack"			"0"
+			}
+
+			"OnOrbImpact"
+			{
+				"RunScript"
+				{
+					"ScriptFile"			"items/item_gu.lua"
+					"Function"				"modifier_item_orb_of_venom_datadriven_on_orb_impact"
+				}
+			}
+		}
+		"modifier_item_orb_of_venom_datadriven_poison_attack_melee"
+		{
+			"Duration"				"%poison_duration"
+			"Passive"				"0"
+			"IsHidden"				"0"
+			"IsBuff"				"0"
+			"IsDebuff"				"1"
+			"IsPurgable"			"1"
+			"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+			"EffectName"			"particles/items2_fx/orb_of_venom.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%poison_movement_speed_melee"
+			}
+
+			"ThinkInterval" 		"%poison_damage_interval"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"					"items/item_gu.lua"
+					"Function"						"modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+					"PoisonDamagePerSecond"			"%poison_damage_per_second"
+					"PoisonDamageInterval"			"%poison_damage_interval"
+				}
+			}
+		}
+		"modifier_item_orb_of_venom_datadriven_poison_attack_ranged"
+		{
+			"Duration"				"%poison_duration"
+			"Passive"				"0"
+			"IsHidden"				"0"
+			"IsBuff"				"0"
+			"IsDebuff"				"1"
+			"IsPurgable"			"1"
+			"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+			"EffectName"			"particles/items2_fx/orb_of_venom.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%poison_movement_speed_ranged"
+			}
+
+			"ThinkInterval" 		"%poison_damage_interval"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"					"items/item_gu.lua"
+					"Function"						"modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+					"PoisonDamagePerSecond"			"%poison_damage_per_second"
+					"PoisonDamageInterval"			"%poison_damage_interval"
+				}
+			}
+		}
+	}
+}
+"item_venom_liquid3"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"item_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"Model"							"models/props_gameplay/red_box.vmdl"
+	"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+	"AbilityTextureName"			"gu"
+
+	// Item Info
+	//-------------------------------------------------------------------------------------------------------------
+	"ItemShopTags"					"hard_to_tag"
+	"ItemQuality"					"secret_shop"
+	"SecretShop"					"1"
+	"SideShop"						"1"
+
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"							"FIELD_INTEGER"
+			"poison_movement_speed_melee"		"-8"
+		}
+		"02"
+		{
+			"var_type"							"FIELD_INTEGER"
+			"poison_movement_speed_ranged"		"-6"
+		}
+		"03"
+		{
+			"var_type"							"FIELD_FLOAT"
+			"poison_duration"					"4.0"
+		}
+		"04"
+		{
+			"var_type"							"FIELD_FLOAT"
+			"poison_damage_per_second"			"12.0"
+		}
+		"05"
+		{
+			"var_type"							"FIELD_FLOAT"
+			"poison_damage_interval"			"2.0"
+		}
+		"06"
+		{
+			"var_type"							"FIELD_INTEGER"
+			"max_stacks"		"3"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_item_orb_of_venom_datadriven"
+		{
+			"Passive"				"1"
+			"IsHidden"				"1"
+			"Attributes" 			"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+			"Orb"
+			{
+				"Priority"				"DOTA_ORB_PRIORITY_ITEM"
+				"Label"					"DOTA_ORB_LABEL_SKADI"  //This does not currently seem to have an effect.  "Label" may not be the right key.
+				"CastAttack"			"0"
+			}
+
+			"OnOrbImpact"
+			{
+				"RunScript"
+				{
+					"ScriptFile"			"items/item_gu.lua"
+					"Function"				"modifier_item_orb_of_venom_datadriven_on_orb_impact"
+				}
+			}
+		}
+		"modifier_item_orb_of_venom_datadriven_poison_attack_melee"
+		{
+			"Duration"				"%poison_duration"
+			"Passive"				"0"
+			"IsHidden"				"0"
+			"IsBuff"				"0"
+			"IsDebuff"				"1"
+			"IsPurgable"			"1"
+			"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+			"EffectName"			"particles/items2_fx/orb_of_venom.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%poison_movement_speed_melee"
+			}
+
+			"ThinkInterval" 		"%poison_damage_interval"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"					"items/item_gu.lua"
+					"Function"						"modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+					"PoisonDamagePerSecond"			"%poison_damage_per_second"
+					"PoisonDamageInterval"			"%poison_damage_interval"
+				}
+			}
+		}
+		"modifier_item_orb_of_venom_datadriven_poison_attack_ranged"
+		{
+			"Duration"				"%poison_duration"
+			"Passive"				"0"
+			"IsHidden"				"0"
+			"IsBuff"				"0"
+			"IsDebuff"				"1"
+			"IsPurgable"			"1"
+			"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+			"EffectName"			"particles/items2_fx/orb_of_venom.vpcf"
+			"EffectAttachType"		"follow_origin"
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%poison_movement_speed_ranged"
+			}
+
+			"ThinkInterval" 		"%poison_damage_interval"
+			"OnIntervalThink"
+			{
+				"RunScript"
+				{
+					"ScriptFile"					"items/item_gu.lua"
+					"Function"						"modifier_item_orb_of_venom_datadriven_poison_attack_on_interval_think"
+					"PoisonDamagePerSecond"			"%poison_damage_per_second"
+					"PoisonDamageInterval"			"%poison_damage_interval"
+				}
+			}
+		}
+	}
+}
+	"item_recipe_rebels_sword2"
+	{
+		"AbilityTextureName" 				"custom/recipe"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"Model"							"models/props_gameplay/recipe.mdl"
+		"BaseClass"                     "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"8000"
+		"ItemShopTags"					""
+
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_rebels_sword2"
+		"ItemRequirements"
+		{
+			"01"						"item_rebels_sword"
+		}
+	}
+	"item_recipe_rebels_sword3"
+	{
+		"AbilityTextureName" 				"custom/recipe"
+   
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"Model"							"models/props_gameplay/recipe.mdl"
+		"BaseClass"                     "item_datadriven"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"12000"
+		"ItemShopTags"					""
+
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_rebels_sword3"
+		"ItemRequirements"
+		{
+			"01"						"item_rebels_sword2"
+		}
+	}	
+	"item_rebels_sword2"
+	{
+	    "BaseClass"						"item_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	        "custom/rebels_sword"
+		"ScriptFile"					"items/rebels_sword/rebels_sword2.lua"
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemStackable"					"0"
+
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "1"
+		"ItemDroppable"                 "1"
+		"ItemPurchasable"				"1"
+
+		"AbilityCooldown"				"0.4"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_armor"			"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_all_stats"		"35"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"80"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"250"
+			}
+
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"disarmor"				"17"
+			}
+
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"disarmor_const"		"5"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_disarmor_pct"		"75"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"3"
+			}
+		}
+	}
+	"item_rebels_sword3"
+	{
+	    "BaseClass"						"item_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	        "custom/rebels_sword"
+		"ScriptFile"					"items/rebels_sword/rebels_sword3.lua"
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemStackable"					"0"
+
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "1"
+		"ItemDroppable"                 "1"
+		"ItemPurchasable"				"1"
+
+		"AbilityCooldown"				"0.4"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_armor"			"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_all_stats"		"45"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"80"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"600"
+			}
+
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"disarmor"				"21"
+			}
+
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"disarmor_const"		"6"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_disarmor_pct"		"83"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"3"
+			}
+		}
+	}	
+	"item_recipe_aether_lens2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"22047"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"						"item_recipe_arcane_boots"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_aether_lens2"
+		"ItemRequirements"
+		{
+			"01"						"item_aether_lens;item_aether_lens"
+		}
+	}
+	"item_aether_lens2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"20184"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_aether_lens"
+		"AbilityTextureName"			"item_aether_lens2"
+
+	
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"4700"
+		"ItemShopTags"					"int;regen_mana;move_speed;hard_to_tag"
+		"ItemQuality"					"rare"
+		"ItemAliases"					"aether lens"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_mana"			"900"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_mana_regen"		"2.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_bonus"			"500"
+			}
+		}
+	}
+	"item_recipe_aether_lens3"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"22048"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		"BaseClass"						"item_recipe_arcane_boots"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_aether_lens3"
+		"ItemRequirements"
+		{
+			"01"						"item_aether_lens2;item_aether_lens2"
+		}
+	}
+	"item_aether_lens3"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"20185"														// unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_aether_lens"
+		"AbilityTextureName"			"item_aether_lens3"
+
+	
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"9400"
+		"ItemShopTags"					"int;regen_mana;move_speed;hard_to_tag"
+		"ItemQuality"					"rare"
+		"ItemAliases"					"aether lens"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_mana"			"1800"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_mana_regen"		"5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_bonus"			"1000"
+			}
+		}
+	}
+
+	"item_recipe_lucifers_claw"
+	{
+		"BaseClass"						"item_datadriven"
+		"Model"							"models/props_gameplay/recipe.mdl"
+		"AbilityTextureName"			"item_recipe"
+		"ItemCost"						"100"
+		"ItemShopTags"					""
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_lucifers_claw"
+		"ItemRequirements"
+		{
+			"01"						"item_fury_shield;item_helm_of_the_dominator"
+		}
+	}
+
+	"item_lucifers_claw"
+	{
+		"BaseClass"						"item_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CREEP"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+		"AbilityTextureName"			"item_arena/lucifers_claw"
+
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"20.0"
+		"AbilityManaCost"				"50"
+		"ItemShopTags"					"damage"
+		"ItemQuality"					"common"
+		"ItemAliases"					"quelling blade"
+		"AbilitySharedCooldown"			"item_quelling_blade;item_iron_talon"
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health_regen"	"6"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_all"				"5"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_bonus"			"80"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_bonus_ranged"	"60"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"alternative_cooldown"	"4"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"doomling_health"		"1500"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"doomling_health_regen"	"15.0"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"doomling_mana"			"350"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"doomling_mana_regen"	"7.0"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"doomling_damage_min"	"57"
+			}
+			"12"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"doomling_damage_max"	"63"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"items/item_lucifers_claw.lua"
+				"Function"		"OnSpellStart"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_item_lucifers_claw"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%bonus_health_regen"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%bonus_all"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"			"%bonus_all"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"		"%bonus_all"
+				}
+			}
+
+			"modifier_item_lucifers_claw_unique"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"kv.lua"
+						"Function"		"ModifyCreepDamage"
+						"damage_bonus"	"%damage_bonus"
+						"damage_bonus_ranged"	"%damage_bonus_ranged"
+					}
+				}
+			}
+		}
+	}	
+}
